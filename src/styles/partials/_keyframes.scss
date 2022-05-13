@@ -1,0 +1,135 @@
+@keyframes spinner {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes arrow-movement {
+  0% { 
+      opacity: 0;
+  }
+  70% {
+      opacity: 1;
+  }
+  100% { 
+      opacity: 0;
+      top: 40%;
+  }
+}
+
+@keyframes wiggle {
+    0% {
+        left: -0.5%;
+    } 25% {
+        left: 1%;
+    } 50% {
+        left: -1%;
+    } 75% {
+        left: 0.5%
+    }
+}
+
+@keyframes fold {
+    0% { transform: scale(1, 0.1); }
+    100% { transform: scale(1, 1); }
+}
+
+@keyframes emphasis {
+    0% { transform: scale(1, 1); }
+    50% { transform: scale(1.1, 1.1); }
+    100% { transform: scale(1, 1); }
+}
+
+@keyframes scroll {
+    0% {
+      animation-timing-function: ease;
+      transform: translateY(0);
+    }
+    12% {
+      animation-timing-function: ease;
+      transform: translateY(-50%);
+    }
+    25% {
+      animation-timing-function: ease;
+      transform: translateY(-50%);
+    }
+    37% {
+      animation-timing-function: ease;
+      transform: translateY(-25%);
+    }
+  
+    50% {
+      animation-timing-function: ease;
+      transform: translateY(-25%);
+    }
+  
+    62% {
+      animation-timing-function: ease;
+      transform: translateY(-75%);
+    }
+  
+    75% {
+      animation-timing-function: ease;
+      transform: translateY(-75%);
+    }
+
+    87% {
+      animation-timing-function: ease;
+      transform: translateY(0);
+    }
+  
+    100% {
+      animation-timing-function: ease;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scrollMobile {
+    0% {
+      animation-timing-function: ease;
+      transform: translateY(0) scaleX(-1);
+    }
+    12% {
+      animation-timing-function: ease;
+      transform: translateY(-50%) scaleX(-1);
+    }
+    25% {
+      animation-timing-function: ease;
+      transform: translateY(-50%) scaleX(-1);
+    }
+    37% {
+      animation-timing-function: ease;
+      transform: translateY(-25%) scaleX(-1);
+    }
+  
+    50% {
+      animation-timing-function: ease;
+      transform: translateY(-25%) scaleX(-1);
+    }
+  
+    62% {
+      animation-timing-function: ease;
+      transform: translateY(-75%) scaleX(-1);
+    }
+  
+    75% {
+      animation-timing-function: ease;
+      transform: translateY(-75%) scaleX(-1);
+    }
+
+    87% {
+      animation-timing-function: ease;
+      transform: translateY(0) scaleX(-1);
+    }
+  
+    100% {
+      animation-timing-function: ease;
+      transform: translateY(0) scaleX(-1);
+    }
+  }
+
+  @keyframes show {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
+}

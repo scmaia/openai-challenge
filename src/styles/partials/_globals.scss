@@ -1,0 +1,72 @@
+@use "colors";
+@use "variables";
+@use "typography" as *;
+@use "mixins" as *;
+
+html {
+    font-size: $root-font-size;
+    font-family: $font-stack;
+    font-weight: 400;
+}
+
+body {
+    margin: 0;
+}
+
+h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin: 1rem 0;
+    @include tablet {
+        font-size: 4.5rem;
+    }
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 300;
+    margin: 1rem 0;
+    @include tablet {
+        font-size: 3rem;
+    }
+}
+
+h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-top: 2.5rem;
+}
+
+p {
+    margin: 0;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+  
+::-webkit-scrollbar-track {
+    background: #c5c5c5;
+}
+
+::-webkit-scrollbar-button {
+    background: black;
+    border: 2px solid #c5c5c5;
+}
+
+::-webkit-scrollbar-thumb {
+    background: black;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

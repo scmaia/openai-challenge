@@ -2,13 +2,13 @@
 import Button from '../Button/Button';
 import {useState} from 'react';
 
-function Form ({ handleSubmit }) {
+function Form ({ handleRequest }) {
 
     const [prompt, setPrompt] = useState('');
     const [mood, setMood] = useState('neutral');
 
     const handlePromptChange = (event) => {
-        setMood(event.target.value)
+        setPrompt(event.target.value)
     };
 
     const handleMoodChange = (event) => {
@@ -17,11 +17,20 @@ function Form ({ handleSubmit }) {
 
     const handleSubmitForm = (event) => {
         event.preventDefault();
-        handleSubmit(prompt);
+        const formattedData = {
+            prompt: prompt,
+            temperature: 0.5,
+            max_tokens: 64,
+            top_p: 1.0,
+            frequency_penalty: 0.0,
+            presence_penalty: 0.0,
+           };
+        setPrompt('');
+        handleRequest(formattedData, prompt, mood);
     };
 
     return (
-        <form className="form" onSubmit={handleSubmit}>
+        <form className="form" onSubmit={handleSubmitForm}>
             <label htmlFor='mood'> Select AI's mood</label>
             <select className='form__field' name="mood" value={mood} onChange={handleMoodChange}>
                 <option value="neutral">Neutral</option>
@@ -31,7 +40,7 @@ function Form ({ handleSubmit }) {
             <label htmlFor='prompt'>Enter prompt </label>
             <input className='form__field' type='text' name='prompt' value={prompt} onChange={handlePromptChange} />
             <div className="form__buttons">
-                <Button text="Submit Order" onClick={handleSubmitForm}/>
+                <Button text="Submit" type='submit'/>
             </div>
         </form>
     );
