@@ -15,7 +15,11 @@ type AIResponse = {
     timestamp:number,
     favorite:boolean,
     id:string
-}
+};
+
+type MoodsObj = {
+    [key in Moods]: string;
+};
 
 export enum Moods {
     Neutral = "neutral",
@@ -23,11 +27,7 @@ export enum Moods {
     Gloomy = "gloomy",
     Flirty = "flirty",
     Sarcastic = "sarcastic"
-}
-
-type MoodsObj = {
-    [key in Moods]: string;
-}
+};
 
 const Main:React.FC = () => {
     const defaultMoodFilters = Object.values(Moods).reduce((prev, curr) => ({ ...prev, [curr]: true }), {}) as MoodsObj;
@@ -51,17 +51,17 @@ const Main:React.FC = () => {
     }, [responses]);
 
     useEffect(() => {
-        // const moodsArray = Object.keys(moodFilters).filter((k) => moodFilters[k]));
-        // const preFiltered = favoriteFilter ? responses.filter(response => response.favorite === true) : responses;
-        // setFilteredResponses(preFiltered.filter(response => response.mood === ))
+        const moodsArray = Object.keys(moodFilters).filter((k) => moodFilters[k as keyof MoodsObj]);
+        const preFiltered = favoriteFilter ? responses.filter(response => response.favorite === true) : responses;
+        setFilteredResponses(preFiltered.filter(response => moodsArray.includes(response.mood)))
     }, [moodFilters, favoriteFilter]);
 
     const handleMoodChange = (newMood:Moods) => {
         setMood(newMood);
     };
 
-    const handleMoodCheckbox = (event:React.ChangeEvent<HTMLInputElement>, key:Moods) => {
-        setMoodFilters({...moodFilters, [moodFilters[key]]: event.target.value});
+    const handleMoodCheckbox = (key:Moods) => {
+        setMoodFilters({...moodFilters, [key]: !moodFilters[key]});
     };
 
     const resetFilters = () => {
@@ -122,15 +122,14 @@ const Main:React.FC = () => {
                 <section>
                     <div>
                         <form>
-                            {Object.entries(Moods).map(([key, value]: [string, Moods]) =>
-                                <div key={key}>
+                            {Object.entries(Moods).map(([key, value]: [string, Moods]) => 
+                                <div key={`checkbox-${key}`}>
                                     <input
                                         type="checkbox"
-                                        key={`checkbox-${key}`}
                                         name={key}
-                                        value={moodFilters[key as keyof MoodsObj]}
-                                        checked={true}
-                                        onChange={(event) => handleMoodCheckbox(event, key as keyof MoodsObj)}
+                                        value={moodFilters[value as keyof MoodsObj]}
+                                        checked={Boolean(moodFilters[value as keyof MoodsObj])}
+                                        onChange={() => handleMoodCheckbox(value as keyof MoodsObj)}
                                     />
                                     <label htmlFor={key}>{key}</label>
                                 </div>
@@ -151,6 +150,6 @@ const Main:React.FC = () => {
             </main>
         </div>
     );
-}
+};
 
 export default Main;
