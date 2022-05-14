@@ -4,9 +4,18 @@
  * type (optional) for additional class options
  */
 
+import React from 'react';
 import './Button.scss';
 
-function Button ({ text, icon, type, extraClass, onClick }) {
+interface IButtonProps {
+    text?:string;
+    icon?:string;
+    type?: "button"  | "submit" | "reset";
+    extraClass?:string;
+    onClick?: (event:React.MouseEvent) => void;
+}
+
+const Button:React.FC<IButtonProps> = ({ text, icon, type, extraClass, onClick }) => {
     return (
         <button className={extraClass ? `CTA CTA--${extraClass}` : 'CTA'} type={type ? type : 'button'} onClick={onClick}>
             {icon && 

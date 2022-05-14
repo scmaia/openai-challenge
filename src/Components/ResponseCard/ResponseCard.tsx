@@ -1,6 +1,14 @@
 // import './ResponseCard.scss';
 
-function ResponseCard ({ prompt, response, mood, timestamp }) {
+interface IRespondeCardProps {
+    prompt:string;
+    response:string;
+    mood:string;
+    favorite: boolean;
+    timestamp:number
+}
+
+const ResponseCard:React.FC<IRespondeCardProps> = ({ prompt, response, mood, favorite, timestamp }) => {
 
     return (
         <div className="response">
