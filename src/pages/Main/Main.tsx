@@ -1,12 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-// import './Main.scss';
+import { cheerfulExample, gloomyExample, flirtyExample, sarcasticExample } from "./utils";
+import './Main.scss';
 import Decoration from '../../components/Decoration/Decoration';
 import MoodSelector from '../../components/MoodSelector/MoodSelector';
 import Form from '../../components/Form/Form';
 import ResponseCard from '../../components/ResponseCard/ResponseCard';
 
-const API_URL="https://api.openai.com/v1/engines/text-curie-001/completions";
+const API_URL="https://api.openai.com/v1/engines/text-davinci-002/completions";
+
+export enum Moods {
+    Neutral = "neutral",
+    Cheerful = "cheerful",
+    Gloomy = "gloomy",
+    Flirty = "flirty",
+    Sarcastic = "sarcastic"
+};
+
+type MoodsObj = {
+    [key in Moods]: string;
+};
 
 type AIResponse = {
     prompt:string,
@@ -15,18 +28,6 @@ type AIResponse = {
     timestamp:number,
     favorite:boolean,
     id:string
-};
-
-type MoodsObj = {
-    [key in Moods]: string;
-};
-
-export enum Moods {
-    Neutral = "neutral",
-    Cheerful = "cheerful",
-    Gloomy = "gloomy",
-    Flirty = "flirty",
-    Sarcastic = "sarcastic"
 };
 
 const Main:React.FC = () => {
@@ -69,15 +70,42 @@ const Main:React.FC = () => {
         setFavoriteFilter(false);
     };
 
-    const handleRequest = (data:object, prompt:string) => {
+    const formatRequestData = (prompt:string) => {
+        let formattedPrompt;
+        if (mood === Moods.Cheerful) {
+            formattedPrompt = cheerfulExample(prompt);
+        } else if (mood === Moods.Gloomy) {
+            formattedPrompt = gloomyExample(prompt);
+        } else if (mood === Moods.Flirty) {
+            formattedPrompt = flirtyExample(prompt);
+        } else if (mood === Moods.Sarcastic) {
+            formattedPrompt = sarcasticExample(prompt);
+        } else {
+            formattedPrompt = prompt;
+        };
+
+        const formattedData = {
+            prompt: formattedPrompt,
+            temperature: 0.5,
+            max_tokens: 60,
+            top_p: 0.3,
+            frequency_penalty: 0.5,
+            presence_penalty: 0.0,
+        };
+
+        return formattedData;
+    }
+
+    const handleRequest = (prompt:string) => {
         setLoading(true);
+        const requestObj = formatRequestData(prompt);
         fetch(API_URL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${process.env.REACT_APP_OPENAI_KEY}`,
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify(requestObj),
         })
             .then(response => {
                 if (response.ok) {
@@ -109,14 +137,17 @@ const Main:React.FC = () => {
     return (
         <div className="main">
             <header>
-                {/* <Decoration /> */}
+                <Decoration mood={mood}/>
+                <h1>Moody AI</h1>
+                <h2>by Sara Maia</h2>
+                <p className='main__credits'>Powered by OpenAI</p>
             </header>
             <main>
                 <section>
                     <MoodSelector handleMoodChange={handleMoodChange} mood={mood}/>
                     {loading
                         ? <p>processing...</p>
-                        : <Form handleRequest={handleRequest} mood={mood}/>
+                        : <Form handleRequest={handleRequest} />
                     }
                 </section>
                 <section>

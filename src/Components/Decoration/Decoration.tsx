@@ -1,4 +1,4 @@
-// import './Decoration.scss';
+import './Decoration.scss';
 import {useState} from 'react';
 
 interface IDecorationProps {
@@ -9,7 +9,7 @@ const Decoration:React.FC<IDecorationProps> = ({ mood }) => {
 
     // const [prompt, setPrompt] = useState('');
 
-    const animations = ['slow', 'medium', 'fast']
+    const animations = ['slow', 'medium', 'fast'];
 
     // const dynamicSvgAnimation = (svgEl) => {
     //     const pathsList = svgEl.getElementsByClassName('svg-path');
@@ -70,7 +70,7 @@ const Decoration:React.FC<IDecorationProps> = ({ mood }) => {
 
     return (
         <section className="decoration">
-
+          {testSvg}
         </section>
     );
 };

@@ -3,11 +3,10 @@ import Button from '../Button/Button';
 import React, {useState} from 'react';
 
 interface IFormProps {
-    handleRequest:(data:object, prompt:string, mood:string) => void;
-    mood:string;
+    handleRequest:(returnPrompt:string) => void;
 }
 
-const Form:React.FC<IFormProps> = ({ handleRequest, mood }) => {
+const Form:React.FC<IFormProps> = ({ handleRequest }) => {
 
     const [prompt, setPrompt] = useState('');
 
@@ -17,16 +16,9 @@ const Form:React.FC<IFormProps> = ({ handleRequest, mood }) => {
 
     const handleSubmitForm = (event:React.ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const formattedData = {
-            prompt: prompt,
-            temperature: 0.5,
-            max_tokens: 64,
-            top_p: 1.0,
-            frequency_penalty: 0.0,
-            presence_penalty: 0.0,
-           };
+        const returnPrompt = prompt;
         setPrompt('');
-        handleRequest(formattedData, prompt, mood);
+        handleRequest(returnPrompt);
     };
 
     return (
