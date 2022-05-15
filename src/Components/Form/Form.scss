@@ -1,0 +1,14 @@
+.form {
+    &__label {
+
+    }
+
+    &__field {
+        display: block;
+        width: 100%;
+        min-width: 180px;
+        margin: 0 auto;
+        border: 2px solid #3C1C78;
+        background-color: #16013E;
+    }
+}

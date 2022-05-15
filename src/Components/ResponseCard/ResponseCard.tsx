@@ -1,4 +1,4 @@
-// import './ResponseCard.scss';
+import './ResponseCard.scss';
 
 interface IRespondeCardProps {
     prompt:string;

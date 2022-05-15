@@ -1,7 +1,94 @@
 .main {
+
+    &__header {
+        text-align: center;
+    }
+
     &__credits {
         position: absolute;
         top: 1rem;
         right: 2rem;
+    }
+
+    &__section {
+        width: 60%;
+        max-width: 50rem;
+        min-width: 20rem;
+        margin: auto;
+        padding: 2rem;
+        box-sizing: border-box;
+        border: 2px solid black;
+    }
+
+    &__inputs {
+        margin-bottom: 2rem;
+    }
+
+    &__outputs {
+        border-bottom: none;
+        margin-bottom: 0;
+    }
+
+    &__filters {
+        list-style: none;
+        padding: 20px;
+    }
+
+    &__filter {
+        display: inline;
+    }
+
+    &__filter-label {
+        display: inline-block;
+        background-color: rgba(255, 255, 255, .9);
+        border: 2px solid rgba(139, 139, 139, .3);
+        color: #adadad;
+        border-radius: 25px;
+        white-space: nowrap;
+        margin: 3px 0px;
+        padding: 8px 12px;
+        cursor: pointer;
+
+        &::before {
+            display: inline-block;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            font-weight: 900;
+            font-size: 12px;
+            padding: 2px 6px 2px 2px;
+            content: "\271B";
+        }
+    }
+
+    &__filter-input {
+        display: absolute;
+        position: absolute;
+        opacity: 0;
+
+        &:checked + .main__filter-label{
+            border: 2px solid #1bdbf8;
+            background-color: #12bbd4;
+            color: #fff;
+        }
+
+        &:checked + .main__filter-label::before {
+            content: "\2713";
+        }
+    }
+
+    &__responses {
+        border-top: 2px solid black;
+        position: relative;
+    }
+
+    &__jagged {
+        height: 2rem;
+        background-color: black;
+        width: 60%;
+        max-width: 50rem;
+        min-width: 20rem;
+        margin: auto;
+        margin-bottom: 4rem;
     }
 }

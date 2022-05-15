@@ -6,6 +6,7 @@ import Decoration from '../../components/Decoration/Decoration';
 import MoodSelector from '../../components/MoodSelector/MoodSelector';
 import Form from '../../components/Form/Form';
 import ResponseCard from '../../components/ResponseCard/ResponseCard';
+// import typewritterLeft from '../../assets/imgs/typewritter-left.svg';
 
 const API_URL="https://api.openai.com/v1/engines/text-davinci-002/completions";
 
@@ -136,48 +137,54 @@ const Main:React.FC = () => {
 
     return (
         <div className="main">
-            <header>
+            <header className="main__header">
                 <Decoration mood={mood}/>
                 <h1>Moody AI</h1>
                 <h2>by Sara Maia</h2>
                 <p className='main__credits'>Powered by OpenAI</p>
             </header>
             <main>
-                <section>
+                <section className="main__inputs main__section">
                     <MoodSelector handleMoodChange={handleMoodChange} mood={mood}/>
                     {loading
                         ? <p>processing...</p>
                         : <Form handleRequest={handleRequest} />
                     }
                 </section>
-                <section>
+                <section className="main__outputs main__section">
                     <div>
-                        <form>
+                        <ul className='main__filters'>
                             {Object.entries(Moods).map(([key, value]: [string, Moods]) => 
-                                <div key={`checkbox-${key}`}>
+                                <li key={`checkbox-${key}`} className='main__filter'>
                                     <input
+                                        className='main__filter-input'
                                         type="checkbox"
                                         name={key}
+                                        id={key}
                                         value={moodFilters[value as keyof MoodsObj]}
                                         checked={Boolean(moodFilters[value as keyof MoodsObj])}
                                         onChange={() => handleMoodCheckbox(value as keyof MoodsObj)}
                                     />
-                                    <label htmlFor={key}>{key}</label>
-                                </div>
+                                    <label htmlFor={key} className='main__filter-label'>{key}</label>
+                                </li>
                             )}
-                        </form>
+                        </ul>
                     </div>
-                    {filteredResponses.map((response) =>
-                        <ResponseCard
-                            key={response.id}
-                            prompt={response.prompt}
-                            response={response.response}
-                            mood={response.mood}
-                            favorite={response.favorite}
-                            timestamp={response.timestamp}
-                        />
-                    )}
+                    <div className='main__responses'>
+                        {filteredResponses.map((response) =>
+                            <ResponseCard
+                                key={response.id}
+                                prompt={response.prompt}
+                                response={response.response}
+                                mood={response.mood}
+                                favorite={response.favorite}
+                                timestamp={response.timestamp}
+                            />
+                        )}
+                        {/* <img src={typewritterLeft}/> */}
+                    </div>
                 </section>
+                <div className='main__jagged'/>
             </main>
         </div>
     );

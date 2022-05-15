@@ -1,4 +1,4 @@
-// import './Form.scss';
+import './Form.scss';
 import Button from '../Button/Button';
 import React, {useState} from 'react';
 
@@ -23,7 +23,7 @@ const Form:React.FC<IFormProps> = ({ handleRequest }) => {
 
     return (
         <form className="form" onSubmit={handleSubmitForm}>
-            <label htmlFor='prompt'>Enter prompt </label>
+            <label htmlFor='prompt' className="form__label">Enter prompt </label>
             <input className='form__field' type='text' name='prompt' value={prompt} onChange={handlePromptChange} />
             <div className="form__buttons">
                 <Button text="Submit" type='submit'/>

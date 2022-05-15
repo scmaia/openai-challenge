@@ -1,4 +1,4 @@
-// import './MoodSelector.scss';
+import './MoodSelector.scss';
 import { Moods } from "../../pages/Main/Main";
 
 interface IMoodSelectorProps {
@@ -14,12 +14,14 @@ const MoodSelector:React.FC<IMoodSelectorProps> = ({ mood, handleMoodChange }) =
 
     return (
         <form className="mood">
-            <label htmlFor='mood'> Select AI's mood</label>
-            <select className='mood__field' name="mood" value={mood} onChange={handleInputChange}>
-                {Object.entries(Moods).map(([key, value]) =>
-                    <option value={value} key={key}>{key}</option>
-                )}
-            </select>
+            <p className="mood__header">Select mood:</p>
+            <label htmlFor='mood' className="mood__select">
+                <select className='mood__field' name="mood" value={mood} onChange={handleInputChange}>
+                    {Object.entries(Moods).map(([key, value]) =>
+                        <option value={value} key={key}>{key}</option>
+                    )}
+                </select>
+            </label>
         </form>
     );
 };

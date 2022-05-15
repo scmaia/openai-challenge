@@ -1,0 +1,7 @@
+.response {
+    border-top: 2px dashed black;
+
+    &:first-of-type {
+        border-top: none;
+    }
+}
