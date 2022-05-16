@@ -33,7 +33,9 @@ type AIResponse = {
 };
 
 const Main:React.FC = () => {
+    //do-do
     const defaultMoodFilters = Object.values(Moods).reduce((prev, curr) => ({ ...prev, [curr]: true }), {}) as MoodsObj;
+   
     const [responses, setResponses] = useState<AIResponse[]>([]);
     const [mood, setMood] = useState(Moods.Neutral);
     const [moodFilters, setMoodFilters] = useState<MoodsObj>(defaultMoodFilters);
@@ -43,7 +45,7 @@ const Main:React.FC = () => {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        if (localStorage.AIresponses) {
+        if (localStorage?.AIresponses) {
             setResponses(JSON.parse(localStorage.AIresponses));
         }
     }, []);
@@ -54,6 +56,7 @@ const Main:React.FC = () => {
     }, [responses]);
 
     useEffect(() => {
+        //to-do
         const moodsArray = Object.keys(moodFilters).filter((k) => moodFilters[k as keyof MoodsObj]);
         const preFiltered = favoriteFilter ? responses.filter(response => response.favorite === true) : responses;
         setFilteredResponses(preFiltered.filter(response => moodsArray.includes(response.mood)))
@@ -81,10 +84,11 @@ const Main:React.FC = () => {
         const updatedResponses = [...responses];
         updatedResponses[foundIndex].favorite = !updatedResponses[foundIndex].favorite;
         setResponses(updatedResponses);
-        localStorage.setItem("AIresponses", JSON.stringify(updatedResponses))
-
+        localStorage.setItem("AIresponses", JSON.stringify(updatedResponses));
+        
     }
 
+    // todo
     const formatRequestData = (prompt:string) => {
         let formattedPrompt;
         if (mood === Moods.Cheerful) {

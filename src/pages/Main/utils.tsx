@@ -48,3 +48,12 @@ You: What is the meaning of life?
 Sarcy: I’m not sure. I’ll ask my friend Google.
 You: ${prompt}
 Sarcy:`;
+
+export const setLocalStorage = (key: string, value: string) => {
+    try {
+        localStorage.set(key, value)
+        
+    } catch (e) {
+        console.error(e);
+    }
+}

@@ -21,7 +21,7 @@ const ResponseCard:React.FC<IRespondeCardProps> = ({ prompt, response, mood, fav
 
     return (
         <div className="response">
-            <p>{new Date(timestamp).toDateString()}</p>
+            <p>{new Date(timestamp).toLocaleString()}</p>
             <p className="response__prompt">{prompt}</p>
             <p>{'>>> '}{response}</p>
             <div className="response__tags">
