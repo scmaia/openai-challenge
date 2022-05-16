@@ -1,5 +1,8 @@
-.App {
+@use './styles/partials/globals' as *;
 
+.App {
+  margin: 0;
+  padding: 0;
 }
 
 .App-header {

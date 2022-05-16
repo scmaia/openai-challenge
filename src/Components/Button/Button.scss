@@ -3,28 +3,26 @@
 // @use '../../styles/partials/variables' as *;
 
 .CTA {
-    background-color: black;
-    color: white;
+    background-color: transparent;
+    color: #08a006;
     height: 3rem;
     min-width: 3rem;
     padding: 0 0.5rem;
-    // border-radius: 20px;
-    border: 2px solid black;
+    border: 1px solid #08a006;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     box-sizing: border-box;
     width: 100%;
+    margin: 1rem 0;
     @include tablet {
         width: auto;
         padding: 0 1.5rem;
     }
 
     &:hover {
-        background-color: white;
-        color: black;
-        border: 2px solid black;
+        border: 1px solid transparent;
         cursor: pointer;
     }
 

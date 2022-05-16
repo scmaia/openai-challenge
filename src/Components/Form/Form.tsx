@@ -10,7 +10,7 @@ const Form:React.FC<IFormProps> = ({ handleRequest }) => {
 
     const [prompt, setPrompt] = useState('');
 
-    const handlePromptChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+    const handlePromptChange = (event:React.ChangeEvent<HTMLTextAreaElement>) => {
         setPrompt(event.target.value)
     };
 
@@ -24,7 +24,7 @@ const Form:React.FC<IFormProps> = ({ handleRequest }) => {
     return (
         <form className="form" onSubmit={handleSubmitForm}>
             <label htmlFor='prompt' className="form__label">Enter prompt </label>
-            <input className='form__field' type='text' name='prompt' value={prompt} onChange={handlePromptChange} />
+            <textarea className='form__field' rows={4} name='prompt' value={prompt} onChange={handlePromptChange} />
             <div className="form__buttons">
                 <Button text="Submit" type='submit'/>
             </div>

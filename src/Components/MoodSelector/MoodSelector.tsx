@@ -14,7 +14,7 @@ const MoodSelector:React.FC<IMoodSelectorProps> = ({ mood, handleMoodChange }) =
 
     return (
         <form className="mood">
-            <p className="mood__header">Select mood:</p>
+            <p className="mood__header">Select AI mood:</p>
             <label htmlFor='mood' className="mood__select">
                 <select className='mood__field' name="mood" value={mood} onChange={handleInputChange}>
                     {Object.entries(Moods).map(([key, value]) =>

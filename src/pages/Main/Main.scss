@@ -1,7 +1,41 @@
+@use '../../styles/partials/keyframes' as *;
+
 .main {
+    background-color: papayawhip;
+    padding-bottom: 4rem;
+    min-height: 100vh;
 
     &__header {
         text-align: center;
+    }
+
+    &__title {
+        margin: 0;
+        animation: titleGlitch 1s linear infinite;
+        color: black;
+        position: relative;
+
+        &::before {
+            content: attr(title);
+            position: absolute;
+            left: 0;
+            animation: titleGlitchTop 1s linear infinite;
+            clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+        }
+
+        &::after {
+            content: attr(title);
+            position: absolute;
+            left: 0;
+            animation: titleGlitchBotom 1.5s linear infinite;
+            clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+        }
+    }
+
+    &__title-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     &__credits {
@@ -24,6 +58,14 @@
         margin-bottom: 2rem;
     }
 
+    &__screen {
+        padding: 2rem;
+        border: 3px inset greenyellow;
+        background-color: rgb(19, 35, 19);
+        color: #02bc00;
+        border-radius: 2rem;
+    }
+
     &__outputs {
         border-bottom: none;
         margin-bottom: 0;
@@ -36,6 +78,7 @@
 
     &__filter {
         display: inline;
+        margin-right: 1rem;
     }
 
     &__filter-label {
@@ -43,7 +86,7 @@
         background-color: rgba(255, 255, 255, .9);
         border: 2px solid rgba(139, 139, 139, .3);
         color: #adadad;
-        border-radius: 25px;
+        border-radius: 15px;
         white-space: nowrap;
         margin: 3px 0px;
         padding: 8px 12px;
@@ -67,8 +110,8 @@
         opacity: 0;
 
         &:checked + .main__filter-label{
-            border: 2px solid #1bdbf8;
-            background-color: #12bbd4;
+            border: 2px solid #8c9d9c;
+            background-color: #7ab9a0;
             color: #fff;
         }
 
@@ -82,13 +125,28 @@
         position: relative;
     }
 
+    &__typewriter {
+        position: absolute;
+        height: 7rem;
+        top: -3.5rem;
+        pointer-events: none;
+
+        &--right {
+            left: calc(100% - 3.5rem);
+        }
+
+        &--left {
+            transform: rotate(180deg);
+            left: -6.5rem;
+        }
+    }
+
     &__jagged {
-        height: 2rem;
-        background-color: black;
+        height: 1rem;
         width: 60%;
         max-width: 50rem;
         min-width: 20rem;
+        background-size: 1.5rem;
         margin: auto;
-        margin-bottom: 4rem;
     }
 }

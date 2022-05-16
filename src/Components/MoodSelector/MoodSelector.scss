@@ -12,8 +12,8 @@
         max-width: 100%;
         min-width: 180px;
         margin: 0 auto;
-        border: 2px solid #3C1C78;
-        background-color: #16013E;
+        border: 1px solid #08a006;
+        background-color: #073407;
         --slice-0: inset(50% 50% 50% 50%);
         --slice-1: inset(80% -6px 0 0);
         --slice-2: inset(50% -6px 30% 0);
@@ -35,9 +35,9 @@
             line-height: 38px;
             content: '\2228';
             text-align: center;
-            color: #714BB9;
+            color: #08a006;
             font-size: 24px;
-            border-left: 2px solid #3C1C78;
+            border-left: 1px solid #08a006;
             pointer-events: none;
         }
     }
@@ -55,6 +55,6 @@
         width: 100%;
         padding: 12px 55px 15px 15px;
         font-size: 14px;
-        color: #714BB9;
+        color: #08a006;
     }
 }

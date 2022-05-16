@@ -6,7 +6,8 @@ import Decoration from '../../components/Decoration/Decoration';
 import MoodSelector from '../../components/MoodSelector/MoodSelector';
 import Form from '../../components/Form/Form';
 import ResponseCard from '../../components/ResponseCard/ResponseCard';
-// import typewritterLeft from '../../assets/imgs/typewritter-left.svg';
+import typewritter from '../../assets/imgs/typewritter.png';
+import jagged from '../../assets/imgs/jagged.svg';
 
 const API_URL="https://api.openai.com/v1/engines/text-davinci-002/completions";
 
@@ -71,6 +72,10 @@ const Main:React.FC = () => {
         setFavoriteFilter(false);
     };
 
+    const toggleFavorite = (id:string) => {
+
+    }
+
     const formatRequestData = (prompt:string) => {
         let formattedPrompt;
         if (mood === Moods.Cheerful) {
@@ -132,6 +137,7 @@ const Main:React.FC = () => {
             })
             .finally(() => {
                 setLoading(false);
+                document.getElementById("responses")?.scrollIntoView();
             })
     }
 
@@ -139,17 +145,21 @@ const Main:React.FC = () => {
         <div className="main">
             <header className="main__header">
                 <Decoration mood={mood}/>
-                <h1>Moody AI</h1>
+                <div className="main__title-container">
+                    <h1 className="main__title" title="Moody AI">Moody AI</h1>
+                </div>
                 <h2>by Sara Maia</h2>
                 <p className='main__credits'>Powered by OpenAI</p>
             </header>
             <main>
                 <section className="main__inputs main__section">
-                    <MoodSelector handleMoodChange={handleMoodChange} mood={mood}/>
-                    {loading
-                        ? <p>processing...</p>
-                        : <Form handleRequest={handleRequest} />
-                    }
+                    <div className="main__screen">
+                        <MoodSelector handleMoodChange={handleMoodChange} mood={mood}/>
+                        {loading
+                            ? <p>processing...</p>
+                            : <Form handleRequest={handleRequest} />
+                        }
+                    </div>
                 </section>
                 <section className="main__outputs main__section">
                     <div>
@@ -170,7 +180,7 @@ const Main:React.FC = () => {
                             )}
                         </ul>
                     </div>
-                    <div className='main__responses'>
+                    <div className='main__responses' id='responses'>
                         {filteredResponses.map((response) =>
                             <ResponseCard
                                 key={response.id}
@@ -181,10 +191,11 @@ const Main:React.FC = () => {
                                 timestamp={response.timestamp}
                             />
                         )}
-                        {/* <img src={typewritterLeft}/> */}
+                        <img className='main__typewriter main__typewriter--right' src={typewritter}/>
+                        <img className='main__typewriter main__typewriter--left' src={typewritter}/>
                     </div>
                 </section>
-                <div className='main__jagged'/>
+                <div className='main__jagged' style={{backgroundImage: `url(${jagged})`}}/>
             </main>
         </div>
     );
