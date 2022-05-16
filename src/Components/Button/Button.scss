@@ -1,5 +1,6 @@
 // @use '../../styles/partials/colors' as *;
 @use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/keyframes' as *;
 // @use '../../styles/partials/variables' as *;
 
 .CTA {
@@ -23,6 +24,8 @@
 
     &:hover {
         border: 1px solid transparent;
+        background-color: #08a006;
+        color: rgb(19, 35, 19);
         cursor: pointer;
     }
 
@@ -48,30 +51,18 @@
         color: black;
     }
 
-    &--secondary {
-        background-color: white;
-        color: black;
-    }
-
     &--disabled {
-        background-color: grey;
-        color: white;
-        border: 2px solid grey;
+        opacity: 0.6;
 
         &:hover {
-            background-color: grey;
-            color: white;
-            border: 2px solid grey;
             cursor: not-allowed;
+            border: 1px solid #08a006;
+            background-color: transparent;
+            color: #08a006;
         }
     }
 
-    &--no-hover {
-        &:hover {
-            background-color: black;
-            color: white;
-            border: 2px solid black;
-            cursor: pointer;
-        }
+    &--enabled {
+        animation: buttonGlitch 0.5s step-start;
     }
 }

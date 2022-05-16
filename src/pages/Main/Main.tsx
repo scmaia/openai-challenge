@@ -67,12 +67,21 @@ const Main:React.FC = () => {
         setMoodFilters({...moodFilters, [key]: !moodFilters[key]});
     };
 
+    const handleFavoriteCheckbox = () => {
+        setFavoriteFilter(!favoriteFilter);
+    };
+
     const resetFilters = () => {
         setMoodFilters(Object.values(Moods).reduce((prev, curr) => ({ ...prev, [curr]: true }), {}) as MoodsObj);
         setFavoriteFilter(false);
     };
 
     const toggleFavorite = (id:string) => {
+        const foundIndex = responses.findIndex(response => response.id === id);
+        const updatedResponses = [...responses];
+        updatedResponses[foundIndex].favorite = !updatedResponses[foundIndex].favorite;
+        setResponses(updatedResponses);
+        localStorage.setItem("AIresponses", JSON.stringify(updatedResponses))
 
     }
 
@@ -137,7 +146,9 @@ const Main:React.FC = () => {
             })
             .finally(() => {
                 setLoading(false);
-                document.getElementById("responses")?.scrollIntoView();
+                document.getElementById("responses")?.scrollIntoView({
+                    behavior: 'smooth'
+                });
             })
     }
 
@@ -162,7 +173,7 @@ const Main:React.FC = () => {
                     </div>
                 </section>
                 <section className="main__outputs main__section">
-                    <div>
+                    <div className='main__container'>
                         <ul className='main__filters'>
                             {Object.entries(Moods).map(([key, value]: [string, Moods]) => 
                                 <li key={`checkbox-${key}`} className='main__filter'>
@@ -179,6 +190,18 @@ const Main:React.FC = () => {
                                 </li>
                             )}
                         </ul>
+                        <div className='main__favorite'>
+                            <input
+                                className='main__filter-input main__filter-input--fave'
+                                type="checkbox"
+                                name="favorite"
+                                id="favorite"
+                                value="favorite"
+                                checked={favoriteFilter}
+                                onChange={handleFavoriteCheckbox}
+                            />
+                            <label htmlFor="favorite" className='main__filter-label'>Favorites Only</label>
+                        </div>
                     </div>
                     <div className='main__responses' id='responses'>
                         {filteredResponses.map((response) =>
@@ -189,8 +212,11 @@ const Main:React.FC = () => {
                                 mood={response.mood}
                                 favorite={response.favorite}
                                 timestamp={response.timestamp}
+                                id={response.id}
+                                toggleFavorite={toggleFavorite}
                             />
                         )}
+                        {filteredResponses.length === 0 && <p>{`>>> `}No response history to show. Submit a prompt or change the filters above.</p>}
                         <img className='main__typewriter main__typewriter--right' src={typewritter}/>
                         <img className='main__typewriter main__typewriter--left' src={typewritter}/>
                     </div>

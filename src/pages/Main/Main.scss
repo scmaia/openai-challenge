@@ -64,6 +64,7 @@
         background-color: rgb(19, 35, 19);
         color: #02bc00;
         border-radius: 2rem;
+        min-height: 278px;
     }
 
     &__outputs {
@@ -73,19 +74,20 @@
 
     &__filters {
         list-style: none;
-        padding: 20px;
+        margin: 0;
+        padding: 0;
     }
 
     &__filter {
         display: inline;
-        margin-right: 1rem;
+        margin-right: 0.8rem;
     }
 
     &__filter-label {
         display: inline-block;
-        background-color: rgba(255, 255, 255, .9);
-        border: 2px solid rgba(139, 139, 139, .3);
-        color: #adadad;
+        background-color: transparent;
+        border: 2px solid rgba(103, 103, 103, 0.4);
+        color: #7b7b7b;
         border-radius: 15px;
         white-space: nowrap;
         margin: 3px 0px;
@@ -118,11 +120,34 @@
         &:checked + .main__filter-label::before {
             content: "\2713";
         }
+
+        &--fave {
+            &:checked + .main__filter-label{
+                border: 2px solid #9d908c;
+                background-color: #b05b44;
+            }
+    
+            &:checked + .main__filter-label::before {
+                content: "\2665";
+            }
+        }
+    }
+
+    &__container {
+        display: flex;
+        margin: 2.5rem 0;
+    }
+
+    &__favorite {
+        border-left: 2px solid black;
+        padding-left: 0.8rem;
     }
 
     &__responses {
+        font-family: 'Courier New', Courier, monospace;
         border-top: 2px solid black;
         position: relative;
+        padding-top: 2rem;
     }
 
     &__typewriter {

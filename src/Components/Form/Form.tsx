@@ -16,9 +16,13 @@ const Form:React.FC<IFormProps> = ({ handleRequest }) => {
 
     const handleSubmitForm = (event:React.ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const returnPrompt = prompt;
-        setPrompt('');
-        handleRequest(returnPrompt);
+        if (prompt.length < 2) {
+            return;
+        } else {
+            const returnPrompt = prompt;
+            setPrompt('');
+            handleRequest(returnPrompt);
+        }
     };
 
     return (
@@ -26,7 +30,10 @@ const Form:React.FC<IFormProps> = ({ handleRequest }) => {
             <label htmlFor='prompt' className="form__label">Enter prompt </label>
             <textarea className='form__field' rows={4} name='prompt' value={prompt} onChange={handlePromptChange} />
             <div className="form__buttons">
-                <Button text="Submit" type='submit'/>
+                {prompt.length > 1 
+                ? <Button text="Submit" type='submit' extraClass='enabled'/>
+                : <Button text="Disabled" type='reset' extraClass='disabled'/>
+                }
             </div>
         </form>
     );
