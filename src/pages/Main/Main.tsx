@@ -26,6 +26,7 @@ type MoodsObj = {
 type AIResponse = {
     prompt:string,
     response:string,
+    error?:string,
     mood:string,
     timestamp:number,
     favorite:boolean,
@@ -130,7 +131,7 @@ const Main:React.FC = () => {
                 if (response.ok) {
                     return response.json()
                 };
-                throw response;
+                throw Error(response.statusText);
             })
             .then(responseData => {
                 const newResponses = [{
@@ -147,6 +148,16 @@ const Main:React.FC = () => {
             .catch(error => {
                 console.error("Error fetching data from openAI api: ", error);
                 setError(error);
+                const ephemeralResponses = [{
+                    prompt: prompt,
+                    response:'Error message: Something went wrong. Please try again. Page reload will erease this record.',
+                    error: String(error),
+                    mood: mood,
+                    favorite: false,
+                    timestamp: Date.now(),
+                    id: uuidv4()
+                }, ...responses];
+                setResponses(ephemeralResponses);
             })
             .finally(() => {
                 setLoading(false);
@@ -164,7 +175,10 @@ const Main:React.FC = () => {
                     <h1 className="main__title" title="Moody AI">Moody AI</h1>
                 </div>
                 <h2>by Sara Maia</h2>
-                <p className='main__credits'>Powered by OpenAI</p>
+                <div className='main__credits'>
+                    <p>Powered by <a href='https://beta.openai.com/'>OpenAI</a></p>
+                    <p>Visit <a href='https://github.com/scmaia/openai-challenge'>GitHub Repo</a></p>
+                </div>
             </header>
             <main>
                 <section className="main__inputs main__section">
@@ -213,6 +227,7 @@ const Main:React.FC = () => {
                                 key={response.id}
                                 prompt={response.prompt}
                                 response={response.response}
+                                error={response.error}
                                 mood={response.mood}
                                 favorite={response.favorite}
                                 timestamp={response.timestamp}

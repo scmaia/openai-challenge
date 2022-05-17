@@ -8,6 +8,10 @@
 
     &__header {
         text-align: center;
+        padding-top: 3rem;
+        @include tablet {
+            padding-top: 0;
+        }
     }
 
     &__title {
@@ -41,8 +45,30 @@
 
     &__credits {
         position: absolute;
+        width: 80%;
+        margin-left: 10%;
         top: 1rem;
-        right: 2rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-size: 0.9rem;
+        font-family: monospace;
+        @include tablet {
+            right: 2rem;
+            flex-direction: column;
+            justify-content: flex-start;
+            width: fit-content;
+            margin-left: 0;
+        }
+
+        & a{
+            color: black;
+            text-decoration: underline dotted;
+        }
+
+        & p{
+            margin: 0.3rem;
+        }
     }
 
     &__section {
@@ -140,9 +166,10 @@
     &__container {
         display: flex;
         flex-direction: column;
-        margin: 2.5rem 0;
+        margin: 0.5rem 0 2.5rem 0;
         @include tablet {
             flex-direction: row;
+            margin: 2.5rem 0;
         }
     }
 

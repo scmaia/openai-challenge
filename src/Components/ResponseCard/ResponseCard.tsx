@@ -3,6 +3,7 @@ import './ResponseCard.scss';
 interface IRespondeCardProps {
     prompt:string;
     response:string;
+    error?:string;
     mood:string;
     favorite: boolean;
     timestamp:number;
@@ -10,7 +11,7 @@ interface IRespondeCardProps {
     toggleFavorite:(id:string) => void;
 }
 
-const ResponseCard:React.FC<IRespondeCardProps> = ({ prompt, response, mood, favorite, timestamp, id, toggleFavorite }) => {
+const ResponseCard:React.FC<IRespondeCardProps> = ({ prompt, response, error, mood, favorite, timestamp, id, toggleFavorite }) => {
 
     const handleClick = () => {
         toggleFavorite(id)
@@ -24,6 +25,7 @@ const ResponseCard:React.FC<IRespondeCardProps> = ({ prompt, response, mood, fav
             <p>{new Date(timestamp).toLocaleString()}</p>
             <p className="response__prompt">{prompt}</p>
             <p>{'>>> '}{response}</p>
+            {error && <p className='response__error'>Error: {error}</p>}
             <div className="response__tags">
                 <p className="response__mood">{mood}</p>
                 {faveIcon}
