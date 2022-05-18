@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { setLocalStorage } from "../../utils/utils";
 import { Moods, AIResponse } from '../../pages/Main/Main';
 import './Print.scss';
-import ResponseCard from '../../components/ResponseCard/ResponseCard';
+import ResponseCard from '../ResponseCard/ResponseCard';
 import typewritter from '../../assets/imgs/typewritter.png';
 
 interface IPrintProps {
