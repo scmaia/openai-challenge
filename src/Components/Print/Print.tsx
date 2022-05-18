@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { setLocalStorage } from "../../utils/utils";
 import { Moods, AIResponse } from '../../pages/Main/Main';
 import './Print.scss';
-import ResponseCard from '../../components/ResponseCard/ResponseCard';
+import ResponseCard from '../ResponseCard/ResponseCard';
 import typewritter from '../../assets/imgs/typewritter.png';
 
 interface IPrintProps {
@@ -25,8 +25,10 @@ const Print:React.FC<IPrintProps> = ({ responses, setResponses }) => {
     const [filteredResponses, setFilteredResponses] = useState<AIResponse[]>([]);
 
     useEffect(() => {
-        setFilteredResponses([...responses]);
-        resetFilters();
+        //if (responses) {
+            setFilteredResponses([...responses]);
+            resetFilters();
+        //}
     }, [responses]);
 
     useEffect(() => {

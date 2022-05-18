@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { apiRequest } from "../../utils/apiUtils";
 import './Main.scss';
-import Decoration from '../../components/Decoration/Decoration';
-import Header from '../../components/Header/Header';
-import MoodSelector from '../../components/MoodSelector/MoodSelector';
-import Form from '../../components/Form/Form';
-import Print from '../../components/Print/Print';
+import Decoration from '../../Components/Decoration/Decoration';
+import Header from '../../Components/Header/Header';
+import MoodSelector from '../../Components/MoodSelector/MoodSelector';
+import Form from '../../Components/Form/Form';
+import Print from '../../Components/Print/Print';
 import jagged from '../../assets/imgs/jagged.svg';
+import { v4 as uuidv4 } from 'uuid';
+import { setLocalStorage } from "../../utils/utils";
 
 export enum Moods {
     Neutral = "neutral",
@@ -37,8 +39,43 @@ const Main:React.FC = () => {
         }
     }, []);
 
+    const onAPIResponse = (apiResponse: any, prompt: string) => {
+        const newResponses = [{
+            prompt: prompt,
+            response: apiResponse.choices[0].text as string,
+            mood: mood,
+            favorite: false,
+            timestamp: Date.now(),
+            id: uuidv4()
+        }, ...responses];
+        setLocalStorage("AIresponses", JSON.stringify(newResponses))
+        setResponses(newResponses);
+        setLoading(false);
+        document.getElementById("responses")?.scrollIntoView({
+            behavior: 'smooth'
+        });
+    }
+
+    const onAPIError = (error: any, prompt: string) => {
+        const ephemeralResponses = [{
+            prompt: prompt,
+            response:'Error message: Something went wrong. Please try again. Page reload will erease this record.',
+            error: String(error),
+            mood: mood,
+            favorite: false,
+            timestamp: Date.now(),
+            id: uuidv4()
+        }, ...responses];
+        setResponses(ephemeralResponses);
+        setLoading(false);
+        document.getElementById("responses")?.scrollIntoView({
+            behavior: 'smooth'
+        });
+    }
+
     const handleRequest = (prompt:string) => {
-        apiRequest(prompt, mood, responses, setResponses, setLoading);
+        setLoading(true);
+        apiRequest(prompt, mood, onAPIResponse, onAPIError);
     }
 
     return (

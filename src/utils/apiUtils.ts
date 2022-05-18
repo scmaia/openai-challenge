@@ -83,8 +83,7 @@ export const formatRequestData = (prompt:string, mood:string) => {
 }
 
 //API request
-export const apiRequest = (prompt:string, mood:string, responses:Array<Object>, setLoading:Function, setResponses:Function) => {
-    setLoading(true);
+export const apiRequest = (prompt:string, mood:string, onAPIResponse: (response: any, prompt: string) => void, onAPIError: (error: any, prompt: string) => void) => {
     const requestObj = formatRequestData(prompt, mood);
     fetch(API_URL, {
         method: "POST",
@@ -101,34 +100,9 @@ export const apiRequest = (prompt:string, mood:string, responses:Array<Object>, 
             throw Error(response.statusText);
         })
         .then(responseData => {
-            const newResponses = [{
-                prompt: prompt,
-                response: responseData.choices[0].text as string,
-                mood: mood,
-                favorite: false,
-                timestamp: Date.now(),
-                id: uuidv4()
-            }, ...responses];
-            setLocalStorage("AIresponses", JSON.stringify(newResponses))
-            setResponses(newResponses);
+            onAPIResponse(responseData, prompt);
         })
         .catch(error => {
-            console.error("Error fetching data from openAI api: ", error);
-            const ephemeralResponses = [{
-                prompt: prompt,
-                response:'Error message: Something went wrong. Please try again. Page reload will erease this record.',
-                error: String(error),
-                mood: mood,
-                favorite: false,
-                timestamp: Date.now(),
-                id: uuidv4()
-            }, ...responses];
-            setResponses(ephemeralResponses);
-        })
-        .finally(() => {
-            setLoading(false);
-            document.getElementById("responses")?.scrollIntoView({
-                behavior: 'smooth'
-            });
+           onAPIError(error, prompt)
         })
 }
