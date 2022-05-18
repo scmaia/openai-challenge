@@ -10,7 +10,7 @@ A simple application using OpenAI api. The application provides a prompt interfa
 - Option to favorite responses
 - Filter per mood and/or favorites
 - Local data persistance
-- Responsive Design
+- Responsive Design & Universaly accessible
 - Vintage UI (own design & assets)
 
 
@@ -44,7 +44,18 @@ This project is currently deployed at:
 Slow initial loading may be due to host service's policy after period of inactivity.
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](./public/moodyAI.JPG)
+
+## Testing
+
+Sample unit test implemented for apiUtils function.
+
+
+## Accessibility
+
+Project tested with Axe DevTools. All accessibility issues resolved.
+
+![App Screenshot](./public/axe-passed.JPG)
 
 
 ## Design Decisions
@@ -61,6 +72,7 @@ If I had more time to work on this project, I would:
 - Add share button
 - Add delete button for individual responses as well as delete all
 - Would revise to save to localstorage only at component will unmount
+- Would implement more unit tests and well as end-to-end tests.
 
 ## Authors
 

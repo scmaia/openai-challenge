@@ -1,11 +1,10 @@
-// @use '../../styles/partials/colors' as *;
 @use '../../styles/partials/mixins' as *;
 @use '../../styles/partials/keyframes' as *;
-// @use '../../styles/partials/variables' as *;
 
 .CTA {
     background-color: transparent;
     color: #08a006;
+    font-family: monospace;
     height: 3rem;
     min-width: 3rem;
     padding: 0 0.5rem;

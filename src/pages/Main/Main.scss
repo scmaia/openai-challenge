@@ -1,75 +1,10 @@
-@use '../../styles/partials/keyframes' as *;
 @use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/colors' as *;
 
 .main {
     background-color: papayawhip;
     padding-bottom: 4rem;
     min-height: 100vh;
-
-    &__header {
-        text-align: center;
-        padding-top: 3rem;
-        @include tablet {
-            padding-top: 0;
-        }
-    }
-
-    &__title {
-        margin: 0;
-        animation: titleGlitch 1s linear infinite;
-        color: black;
-        position: relative;
-
-        &::before {
-            content: attr(title);
-            position: absolute;
-            left: 0;
-            animation: titleGlitchTop 1s linear infinite;
-            clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
-        }
-
-        &::after {
-            content: attr(title);
-            position: absolute;
-            left: 0;
-            animation: titleGlitchBotom 1.5s linear infinite;
-            clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
-        }
-    }
-
-    &__title-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    &__credits {
-        position: absolute;
-        width: 80%;
-        margin-left: 10%;
-        top: 1rem;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        font-size: 0.9rem;
-        font-family: monospace;
-        @include tablet {
-            right: 2rem;
-            flex-direction: column;
-            justify-content: flex-start;
-            width: fit-content;
-            margin-left: 0;
-        }
-
-        & a{
-            color: black;
-            text-decoration: underline dotted;
-        }
-
-        & p{
-            margin: 0.3rem;
-        }
-    }
 
     &__section {
         width: 80%;
@@ -91,126 +26,16 @@
     &__screen {
         padding: 2rem;
         border: 3px inset greenyellow;
-        background-color: rgb(19, 35, 19);
-        color: #02bc00;
+        background-color: $screen-background;
+        color: $screen-text;
         border-radius: 2rem;
         min-height: 278px;
+        font-family: monospace;
     }
 
     &__outputs {
         border-bottom: none;
         margin-bottom: 0;
-    }
-
-    &__filters {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    &__filter {
-        display: inline;
-        margin-right: 0.8rem;
-    }
-
-    &__filter-label {
-        display: inline-block;
-        background-color: transparent;
-        border: 2px solid rgba(103, 103, 103, 0.4);
-        color: #7b7b7b;
-        border-radius: 15px;
-        white-space: nowrap;
-        margin: 3px 0px;
-        padding: 8px 12px;
-        cursor: pointer;
-
-        &::before {
-            display: inline-block;
-            font-style: normal;
-            font-variant: normal;
-            text-rendering: auto;
-            font-weight: 900;
-            font-size: 12px;
-            padding: 2px 6px 2px 2px;
-            content: "\271B";
-        }
-    }
-
-    &__filter-input {
-        display: absolute;
-        position: absolute;
-        opacity: 0;
-
-        &:checked + .main__filter-label{
-            border: 2px solid #8c9d9c;
-            background-color: #7ab9a0;
-            color: #fff;
-        }
-
-        &:checked + .main__filter-label::before {
-            content: "\2713";
-        }
-
-        &--fave {
-            &:checked + .main__filter-label{
-                border: 2px solid #9d908c;
-                background-color: #b05b44;
-            }
-    
-            &:checked + .main__filter-label::before {
-                content: "\2665";
-            }
-        }
-    }
-
-    &__container {
-        display: flex;
-        flex-direction: column;
-        margin: 0.5rem 0 2.5rem 0;
-        @include tablet {
-            flex-direction: row;
-            margin: 2.5rem 0;
-        }
-    }
-
-    &__favorite {
-        @include tablet {
-            border-left: 2px solid black;
-            padding-left: 0.8rem;
-        }
-    }
-
-    &__responses {
-        font-family: 'Courier New', Courier, monospace;
-        border-top: 2px solid black;
-        position: relative;
-        padding-top: 2rem;
-    }
-
-    &__typewriter {
-        position: absolute;
-        height: 4rem;
-        top: -2rem;
-        pointer-events: none;
-        @include tablet {
-            height: 7rem;
-            top: -3.5rem;
-        }
-
-        &--right {
-            left: calc(100% - 1rem);
-            @include tablet{
-                left: calc(100% - 3.5rem);
-            }
-        }
-
-        &--left {
-            transform: rotate(180deg);
-            left: -4.5rem;
-            @include tablet{
-                left: -6.5rem;
-            }
-        }
     }
 
     &__jagged {

@@ -1,8 +1,9 @@
 import './Decoration.scss';
-import { baseSvg, cheerfulSvg, gloomySvg, flirtySvg, sarcasticSvg } from "./images";
+import { baseSvg, cheerfulSvg, gloomySvg, flirtySvg, sarcasticSvg } from "./svgImages";
 
 interface IDecorationProps {
-    mood:string
+  //mood category to render associated graphics
+  mood:string
 }
 
 const Decoration:React.FC<IDecorationProps> = ({ mood }) => {

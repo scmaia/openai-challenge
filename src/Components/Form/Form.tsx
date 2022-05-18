@@ -3,6 +3,7 @@ import Button from '../Button/Button';
 import React, {useState} from 'react';
 
 interface IFormProps {
+    // function to handle api request upon form submission
     handleRequest:(returnPrompt:string) => void;
 }
 
@@ -27,12 +28,12 @@ const Form:React.FC<IFormProps> = ({ handleRequest }) => {
 
     return (
         <form className="form" onSubmit={handleSubmitForm}>
-            <label htmlFor='prompt' className="form__label">Enter prompt </label>
-            <textarea className='form__field' rows={4} name='prompt' value={prompt} onChange={handlePromptChange} />
+            <label htmlFor='prompt' className="form__label">Enter prompt: </label>
+            <textarea className='form__field' rows={4} name='prompt' id='prompt' value={prompt} onChange={handlePromptChange} />
             <div className="form__buttons">
                 {prompt.length > 1 
                 ? <Button text="Submit" type='submit' extraClass='enabled'/>
-                : <Button text="Disabled" type='reset' extraClass='disabled'/>
+                : <div aria-hidden><Button text="Disabled" type='reset' extraClass='disabled'/></div>
                 }
             </div>
         </form>

@@ -1,4 +1,5 @@
 @use '../../styles/partials/keyframes' as *;
+@use '../../styles/partials/colors' as *;
 
 .mood {
     &__header {
@@ -12,8 +13,8 @@
         max-width: 100%;
         min-width: 180px;
         margin: 0 auto;
-        border: 1px solid #08a006;
-        background-color: #073407;
+        border: 1px solid $screen-boxes;
+        background-color: $screen-background-lighter;
 
         &::after {
             position: absolute;
@@ -24,9 +25,9 @@
             line-height: 38px;
             content: '\2228';
             text-align: center;
-            color: #08a006;
+            color: $screen-text-lighter;
             font-size: 24px;
-            border-left: 1px solid #08a006;
+            border-left: 1px solid $screen-boxes;
             pointer-events: none;
         }
     }
@@ -34,7 +35,7 @@
     &__field {
         border: none;
         outline: none;
-        background: transparent;
+        background: $screen-background-lighter;
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
@@ -44,6 +45,6 @@
         width: 100%;
         padding: 12px 55px 15px 15px;
         font-size: 14px;
-        color: #08a006;
+        color: $screen-text-lighter;
     }
 }

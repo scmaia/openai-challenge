@@ -1,13 +1,21 @@
 import './ResponseCard.scss';
 
 interface IRespondeCardProps {
+    //prompt value from response object
     prompt:string;
+    //response value from response object
     response:string;
+    //error value from response object
     error?:string;
+    //mood value from response object
     mood:string;
+    //favorite value from response object
     favorite: boolean;
+    //timestamp value from response object
     timestamp:number;
+    //id value from response object
     id:string;
+    //function to update favorite value in response object. Accepts id value of object to update.
     toggleFavorite:(id:string) => void;
 }
 
